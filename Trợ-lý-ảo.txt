@@ -1,0 +1,218 @@
+# Module Library
+from datetime import date, datetime, time 
+import webbrowser
+import time 
+from youtube_search import YoutubeSearch
+import sys
+import ctypes
+import wikipedia
+import json
+import re
+import smtplib
+import requests
+import urllib
+import urllib.request as urllib2
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
+from time import strftime
+import serial
+import pyttsx3
+import speech_recognition as sr
+import playsound
+import os
+from gtts import gTTS 
+wikipedia.set_lang("vi")
+language = "vi"
+path = ChromeDriverManager().install()
+ser = serial.Serial("COM3", 9600)
+# Module Serial (UART)
+def SerialWrite(s):
+    ser.write(s.encode())
+    
+# Module Speak
+def speak(text):
+    print("Pi: " + text)
+    tts = gTTS(text= text, lang= "vi", slow=False)      # Chuyển text thành âm thanh qua API google
+    tts.save("sound.mp3")                               # Sau khi gửi âm thanh về thì sẽ lưu lại dưới tên sound.mp3
+    playsound.playsound("sound.mp3", True)              # Phát file sound.mp3
+    os.remove("sound.mp3")                              # Xóa file sound.mp3
+
+# Module Hear
+def hear():
+    print ("Đang nghe:...")
+    r = sr.Recognizer()                     # Lưu lại class Recognizer dưới tên là r\
+    with sr.Microphone() as source:         # Mở một Microphone mới và lưu với tên source, sau khi thoát with as thì tắt Microphone đi
+        print("Tôi: ",end='')
+        audio = r.listen(source, phrase_time_limit = 3)      # Lưu lại câu nói của mình dưới dạng âm thanh (.mp3)
+        try:
+            text = r.recognize_google(audio, language="vi-VN")
+            print (text)
+            return str(text).lower()
+        except:
+            print("...")
+            return None
+
+def stop():
+    speak("Hẹn gặp lại bạn sau!")
+def get_text():
+    for i in range(3):
+        text = hear()
+        if text:
+            return text.lower()
+        elif i < 2:
+            speak("Mình không nghe rõ bạn nói. Vui lòng nói lại nha !")
+    time.sleep(3)
+    stop()
+    return 0
+
+# Module Youtube
+def play_youtube():
+    speak("Nói nội dung bạn muốn tìm trên youtube")
+    search = get_text()
+    while True:
+        result = YoutubeSearch(search, max_results=10).to_dict()
+        if result:
+            break
+    url = f"https://www.youtube.com" + result[0]['url_suffix']
+    webbrowser.get().open(url)
+    speak("Đây là thứ mà tôi tìm được bạn xem qua nhé")
+    print(result)
+
+# Module tìm kiếm web
+def open_website(text):
+    reg_ex = re.search('mở (.+)', text)
+    if reg_ex:
+        domain = reg_ex.group(1)
+        url = "https://www." + domain
+        webbrowser.open(url)
+        speak("Trang web bạn yêu cầu đã được mở. ")
+        if input("Nếu muốn tiếp tục thì nhấn q: ") == "q":
+            pass
+        return True
+    else:
+        return False
+def open_google_and_search(text):
+    search_for = str(text).split("kiếm", 1)[1]
+    url = f"https://www.google.com/search?q={search_for}"
+    webbrowser.get().open(url)
+    speak("Đây là thông tin bạn cần tìm")
+def open_google_and_search2():
+    speak("Nói thứ bạn cần tìm kiếm trên google")
+    search = str(get_text()).lower()
+    url = f"https://www.google.com/search?q={search}"
+    webbrowser.get().open(url)
+    speak("Đây là thông tin bạn cần tìm")
+
+# Module Wikipedia
+def tell_me_about():
+    try:
+        speak("Bạn muốn nghe về gì ạ")
+        text = get_text()
+        contents = wikipedia.summary(text).split('\n')
+        speak(contents[0])
+        time.sleep(10)
+        for content in contents[1:]:
+            speak("Bạn muốn nghe thêm không")
+            ans = get_text()
+            if "có" not in ans:
+                break    
+            speak(content)
+            time.sleep(10)
+        speak('Cảm ơn bạn đã lắng nghe!!!')
+    except:
+        speak("Bot không định nghĩa được thuật ngữ của bạn. Xin mời bạn nói lại")
+
+#Module Main
+speak("Xin chào! Mình là Pi, trợ lý ảo ô tô của trường Đại học Hutech !")
+while True:
+    you = hear()
+    if you == None:
+        speak("Bạn có thể nói lại được không?")
+    elif "xin chào" in you:
+        speak("Chào bạn, chúc bạn một ngày vui vẻ")
+    elif "đến từ đâu" in you:
+        speak("Mình đến từ Việt Nam")
+    elif "hôm nay" in you or "bây giờ" in you:
+        now = datetime.now()
+        if "giờ" in you: 
+            t = now.strftime("%H h, %M phút, %S giây")
+            speak(t)
+        if "ngày" in you:
+            t = now.strftime("Hôm nay là ngày %d/%m/%Y")
+            speak(t)
+    elif "định nghĩa" in you or "thông tin" in you:
+        tell_me_about()
+    elif "tìm kiếm" in you:
+        if str(you).split("kiếm", 1)[1] == "":
+            open_google_and_search2()
+        else:
+            open_google_and_search(you)
+    elif 'youtube' in you:
+            play_youtube()
+            break
+    elif "tạm biệt" in you:
+        stop()
+        break 
+
+# Module hệ thống gập gương
+    elif "nhả gương" in you or "nhã gương" in you or "mở gương" in you:
+        ser.write('M'.encode())
+        speak("Đã mở gương")
+    elif "gập gương" in you or "gặp gương" in you:
+        ser.write('G'.encode())
+        speak("Đã gập gương")
+    elif "tắt chế độ" in you or "thoát chế độ" in you:
+        ser.write('T'.encode())
+        speak("Đã tắt chế độ")
+        break
+# Module khóa IG 
+    elif "khóa ig" in you or "khóa nguồn" in you:
+        ser.write('X'.encode())
+        speak("Đã khóa IG")
+    elif "tắt khóa ig" in you or "mở nguồn" in you or "bật ig" in you:
+        ser.write('x'.encode())
+        speak("Đã mở IG")
+# Module hệ thống chiếu sáng, tín hiệu
+    elif "bật" in you:
+        if "đèn kích thước" in you or "đèn demi" in you:
+            ser.write('F'.encode())
+            speak("Đã mở đèn kích thước")
+        if "đèn chiếu gần" in you or "đèn cốt" in you:
+            ser.write('H'.encode())
+            speak("Đã mở đèn chiếu gần")
+        if "đèn chiếu xa" in you or "đèn pha" in you:
+            ser.write('U'.encode())
+            speak("Đã mở đèn chiếu xa")
+        if "đèn ưu tiên" in you or "đèn báo nguy" in you:
+            ser.write('Z'.encode())
+            speak("Đã mở đèn ưu tiên")
+        if "đèn xi nhan phải" in you or "xi nhan phải" in you:
+            ser.write('T'.encode())
+            speak("Đã mở đèn xi nhan phải")
+        if "đèn xi nhan trái" in you or "xi nhan trái" in you:
+            ser.write('V'.encode())
+            speak("Đã mở đèn xi nhan trái")   
+    elif "tắt" in you:
+        if "đèn kích thước" in you or "đèn demi" in you:
+            ser.write('f'.encode())
+            speak("Đã tắt đèn kích thước")
+        if "đèn chiếu gần" in you or "đèn cốt" in you:
+            ser.write('h'.encode())
+            speak("Đã tắt đèn chiếu gần")
+        if "đèn chiếu xa" in you or "đèn pha" in you:
+            ser.write('u'.encode())
+            speak("Đã tắt đèn chiếu xa")
+        if "đèn ưu tiền" in you or "đèn báo nguy" in you:
+            ser.write('z'.encode())
+            speak("Đã tắt đèn ưu tiên")
+        if "đèn xi nhan phải" in you or "xi nhan phải" in you:
+            ser.write('t'.encode())
+            speak("Đã tắt đèn xi nhan phải")
+        if "đèn xi nhan trái" in you or "xi nhan trái" in you:
+            ser.write('v'.encode())
+            speak("Đã tắt đèn xi nhan trái")
+        if "tất cả đèn" in you or "tất cả" in you:
+            ser.write('A'.encode())
+            speak("Đã tắt hết đèn chiếu sáng")
+            break

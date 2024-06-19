@@ -1,0 +1,169 @@
+# Module hệ thống gập gương
+    elif "nhả gương" in you or "nhã gương" in you or "mở gương" in you:
+        ser.write('M'.encode())
+        speak("Đã mở gương")
+    elif "gập gương" in you or "gặp gương" in you:
+        ser.write('G'.encode())
+        speak("Đã gập gương")
+    elif "tắt chế độ" in you or "thoát chế độ" in you:
+        ser.write('T'.encode())
+        speak("Đã tắt chế độ")
+        break
+# Module khóa IG 
+    elif "khóa IG" in you or "khóa nguồn" in you or "đóng nguồn" in you or "đóng IG" in you:
+        ser.write('X'.encode())
+        speak("Đã khóa IG")
+    elif "tắt khóa IG" in you or "tắt khóa nguồn" in you:
+        ser.write('x'.encode())
+        speak("Đã mở IG")
+# Module hệ thống chiếu sáng, tín hiệu
+    elif "bật" in you:
+        if "đèn kích thước" in you or "đèn demi" in you:
+            ser.write('F'.encode())
+            speak("Đã mở đèn kích thước")
+        if "đèn chiếu gần" in you or "đèn cốt" in you:
+            ser.write('H'.encode())
+            speak("Đã mở đèn chiếu gần")
+        if "đèn chiếu xa" in you or "đèn pha" in you:
+            ser.write('U'.encode())
+            speak("Đã mở đèn chiếu xa")
+        if "đèn ưu tiền" in you or "đèn báo nguy" in you:
+            ser.write('Z'.encode())
+            speak("Đã mở đèn ưu tiên")
+        if "đèn xi nhan phải" in you or "xi nhan phải" in you:
+            ser.write('T'.encode())
+            speak("Đã mở đèn xi nhan phải")
+        if "đèn xi nhan trái" in you or "xi nhan trái" in you:
+            ser.write('V'.encode())
+            speak("Đã mở đèn xi nhan trái")   
+    elif "tắt" in you:
+        if "đèn kích thước" in you or "đèn demi" in you:
+            ser.write('f'.encode())
+            speak("Đã tắt đèn kích thước")
+        if "đèn chiếu gần" in you or "đèn cốt" in you:
+            ser.write('h'.encode())
+            speak("Đã tắt đèn chiếu gần")
+        if "đèn chiếu xa" in you or "đèn pha" in you:
+            ser.write('u'.encode())
+            speak("Đã tắt đèn chiếu xa")
+        if "đèn ưu tiền" in you or "đèn báo nguy" in you:
+            ser.write('z'.encode())
+            speak("Đã tắt đèn ưu tiên")
+        if "đèn xi nhan phải" in you or "xi nhan phải" in you:
+            ser.write('t'.encode())
+            speak("Đã tắt đèn xi nhan phải")
+        if "đèn xi nhan trái" in you or "xi nhan trái" in you:
+            ser.write('v'.encode())
+            speak("Đã tắt đèn xi nhan trái")
+        if "tất cả đèn" in you or "tất cả" in you:
+            ser.write('A'.encode())
+            speak("Đã tắt hết đèn chiếu sáng")
+            break
+# Module nâng hạ kính
+    elif "nâng" in you or "bên tài" in you:                         # Bên tài xế
+        if "hết kính" in you:
+            ser.write('L'.encode())
+            speak("Đã nâng hết kính tài xế")
+        if "một phần tư" in you:
+            ser.write('1'.encode())
+            speak("Đã nâng một phần tư kính tài xế")
+        if "một phần hai" in you or "một nửa" in you:
+            ser.write('2'.encode())
+            speak("Đã nâng một nửa kính tài xế")
+        if "ba phần tư" in you:
+            ser.write('3'.encode())
+            speak("Đã nâng ba phần tư kính tài xế")
+    elif "hạ" in you or "bên tài" in you:
+        if "hết kính" in you:
+            ser.write('l'.encode())
+            speak("Đã hạ hết kính tài xế")
+        if "một phần tư" in you:
+            ser.write('4'.encode())
+            speak("Đã hạ một phần tư kính tài xế")  
+        if "một phần hai" in you or "một nửa" in you:
+            ser.write('5'.encode())
+            speak("Đã hạ một nửa kính tài xế")
+        if "ba phần tư" in you:
+            ser.write('6'.encode())
+            speak("Đã hạ ba phần tư kính tài xế")  
+    
+    elif "nâng" in you or "bên phụ" in you:                         # Bên phụ
+        if "hết kính" in you:
+            ser.write('R'.encode())
+            speak("Đã nâng hết kính bên phụ")
+        if "một phần tư" in you:
+            ser.write('7'.encode())
+            speak("Đã nâng một phần tư kính bên phụ")
+        if "một phần hai" in you or "một nửa" in you:
+            ser.write('8'.encode())
+            speak("Đã nâng một nửa kính bên phụ")
+        if "ba phần tư" in you:
+            ser.write('9'.encode())
+            speak("Đã nâng ba phần tư kính bên phụ")
+    elif "hạ" in you or "bên phụ" in you:
+        if "hết kính" in you:
+            ser.write('r'.encode())
+            speak("Đã hạ hết kính bên phụ")
+        if "một phần tư" in you:
+            ser.write('0'.encode())
+            speak("Đã hạ một phần tư kính bên phụ")  
+        if "một phần hai" in you or "một nửa" in you:
+            ser.write('`'.encode())
+            speak("Đã hạ một nửa kính bên phụ")
+        if "ba phần tư" in you:
+            ser.write('-'.encode())
+            speak("Đã hạ ba phần tư kính bên phụ")
+    
+    elif "nâng" in you or "sau tài xế" in you:                          # Sau tài xế
+        if "hết kính" in you:
+            ser.write('S'.encode())
+            speak("Đã nâng hết kính sau tài xế")
+        if "một phần tư" in you:
+            ser.write('_'.encode())
+            speak("Đã nâng một phần tư kính sau tài xế")
+        if "một phần hai" in you or "một nửa" in you:
+            ser.write('+'.encode())
+            speak("Đã nâng một nửa kính sau tài xế")
+        if "ba phần tư" in you:
+            ser.write('='.encode())
+            speak("Đã nâng ba phần tư kính sau tài xế")
+    elif "hạ" in you or "bên phụ" in you:
+        if "hết kính" in you:
+            ser.write('s'.encode())
+            speak("Đã hạ hết kính sau tài xế")
+        if "một phần tư" in you:
+            ser.write('*'.encode())
+            speak("Đã hạ một phần tư kính sau tài xế")  
+        if "một phần hai" in you or "một nửa" in you:
+            ser.write('&'.encode())
+            speak("Đã hạ một nửa kính sau tài xế")
+        if "ba phần tư" in you:
+            ser.write('^'.encode())
+            speak("Đã hạ ba phần tư kính sau tài xế")
+
+    elif "nâng" in you or "sau phụ" in you:                          # Sau phụ
+        if "hết kính" in you:
+            ser.write('P'.encode())
+            speak("Đã nâng hết kính sau phụ")
+        if "một phần tư" in you:
+            ser.write('%'.encode())
+            speak("Đã nâng một phần tư kính sau phụ")
+        if "một phần hai" in you or "một nửa" in you:
+            ser.write('$'.encode())
+            speak("Đã nâng một nửa kính sau phụ")
+        if "ba phần tư" in you:
+            ser.write('#'.encode())
+            speak("Đã nâng ba phần tư kính sau phụ")
+    elif "hạ" in you or "bên phụ" in you:
+        if "hết kính" in you:
+            ser.write('p'.encode())
+            speak("Đã hạ hết kính sau phụ")
+        if "một phần tư" in you:
+            ser.write('@'.encode())
+            speak("Đã hạ một phần tư kính sau phụ")  
+        if "một phần hai" in you or "một nửa" in you:
+            ser.write('!'.encode())
+            speak("Đã hạ một nửa kính sau phụ")
+        if "ba phần tư" in you:
+            ser.write('~'.encode())
+            speak("Đã hạ ba phần tư kính sau phụ")

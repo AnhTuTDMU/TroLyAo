@@ -1,0 +1,507 @@
+int relay2=2; // khai báo các chân ra của các relay kích 5v 2 kênh H/L chân D+ từ chân 2-30
+int relay3=3;
+int relay4=4;
+int relay5=5;
+int relay6=6;
+int relay7=7;
+int relay8=8;
+int relay9=9;
+int relay10=10;
+int relay11=11;
+int relay12=12;
+int relay13=13;
+int relay14=14;
+int relay15=15;
+int relay16=16;
+int relay17=17;
+int relay18=18;
+int relay19=19;
+int relay20=20;
+int relay21=21;
+int relay22=22;
+int relay24=24;
+int relay26=26;
+int relay28=28;
+int relay30=30;
+int relay32=32;
+int relay34=34;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(relay2,OUTPUT); //khai báo các relay điều khiển
+  pinMode(relay3,OUTPUT);
+  pinMode(relay4,OUTPUT);
+  pinMode(relay5,OUTPUT);
+  pinMode(relay6,OUTPUT);
+  pinMode(relay7,OUTPUT);
+  pinMode(relay8,OUTPUT);
+  pinMode(relay9,OUTPUT);
+  pinMode(relay10,OUTPUT);
+  pinMode(relay11,OUTPUT);
+  pinMode(relay12,OUTPUT);
+  pinMode(relay13,OUTPUT);
+  pinMode(relay14,OUTPUT);
+  pinMode(relay15,OUTPUT);
+  pinMode(relay16,OUTPUT);
+  pinMode(relay17,OUTPUT);
+  pinMode(relay18,OUTPUT);
+  pinMode(relay19,OUTPUT);
+  pinMode(relay20,OUTPUT);
+  pinMode(relay21,OUTPUT);
+  pinMode(relay22,OUTPUT);
+  pinMode(relay24,OUTPUT);
+  pinMode(relay26,OUTPUT);
+  pinMode(relay28,OUTPUT);
+  pinMode(relay30,OUTPUT);
+  pinMode(relay32,OUTPUT);
+  pinMode(relay34,OUTPUT);
+  digitalWrite(relay2,LOW); //các chân ra để kích relay điều khiển phải đang được tắt
+  digitalWrite(relay3,LOW);
+  digitalWrite(relay4,LOW);
+  digitalWrite(relay5,LOW);
+  digitalWrite(relay6,LOW);
+  digitalWrite(relay7,LOW);
+  digitalWrite(relay8,LOW);
+  digitalWrite(relay9,LOW);
+  digitalWrite(relay10,LOW);
+  digitalWrite(relay11,LOW);
+  digitalWrite(relay12,LOW);
+  digitalWrite(relay13,LOW);
+  digitalWrite(relay14,LOW);
+  digitalWrite(relay15,LOW);
+  digitalWrite(relay16,LOW);
+  digitalWrite(relay17,LOW);
+  digitalWrite(relay18,LOW);
+  digitalWrite(relay19,LOW);
+  digitalWrite(relay20,LOW);
+  digitalWrite(relay21,LOW);
+  digitalWrite(relay22,LOW);
+  digitalWrite(relay24,LOW);
+  digitalWrite(relay26,LOW);
+  digitalWrite(relay28,LOW);
+  digitalWrite(relay30,LOW);
+  digitalWrite(relay32,LOW);
+  digitalWrite(relay34,LOW);
+}
+void loop()
+{
+  gapguong();
+  nanghakinh();
+  chieusangtinhieu();
+  khoaig();
+}
+void gapguong()
+{
+char a = Serial.read();
+if(a == 'M') //Mở gương chiếu hậu
+{
+  digitalWrite(relay18,HIGH);
+  digitalWrite(relay19,HIGH);
+  digitalWrite(relay32,LOW);
+  digitalWrite(relay34,HIGH);
+  Serial.println("Đã mở gương");
+}
+else if(a == 'G') //Gập gương chiếu hậu
+{
+  digitalWrite(relay32,HIGH);
+  digitalWrite(relay34,HIGH);
+  digitalWrite(relay18,LOW);
+  digitalWrite(relay19,HIGH);
+  Serial.println("Đã gập gương");
+}
+else if(a == 'T') //Thoát khỏi chế độ
+{
+  digitalWrite(relay18,LOW);
+  digitalWrite(relay19,LOW);
+  digitalWrite(relay32,LOW);
+  digitalWrite(relay34,LOW);
+  Serial.println("Đã thoát chế độ");
+}
+}
+void nanghakinh()
+{
+char b = Serial.read();
+if(b == 'L') //Nâng hết kính bên tài xế
+{
+  digitalWrite(relay2,HIGH);
+  digitalWrite(relay3,HIGH);
+  delay(5500);
+  digitalWrite(relay2,LOW);
+  digitalWrite(relay3,LOW);
+  Serial.println("Đã nâng kính bên tài ");
+}
+else if(b == '1') // Nâng 1/4 kính bên tài xế
+{
+  digitalWrite(relay2,HIGH);
+  digitalWrite(relay3,HIGH);
+  delay(1375);
+  digitalWrite(relay2,LOW);
+  digitalWrite(relay3,LOW);
+  Serial.println("Đã nâng 1/4 kính");
+}
+else if(b == '2') //Nâng 1/2 kính bên tài xế
+{
+  digitalWrite(relay2,HIGH);
+  digitalWrite(relay3,HIGH);
+  delay(2750);
+  digitalWrite(relay2,LOW);
+  digitalWrite(relay3,LOW);
+  Serial.println("Đã nâng 1/2 kính");
+}
+else if(b == '3') //Nâng 3/4 kính bên tài xế
+{
+  digitalWrite(relay2,HIGH);
+  digitalWrite(relay3,HIGH);
+  delay(4125);
+  digitalWrite(relay2,LOW);
+  digitalWrite(relay3,LOW);
+  Serial.println("Đã nâng 3/4 kính");
+}
+if(b == 'l') //Hạ hết kính bên tài xế
+{ 
+  digitalWrite(relay4,HIGH);
+  digitalWrite(relay5,HIGH);
+  delay(5500);
+  digitalWrite(relay4,LOW);
+  digitalWrite(relay5,LOW);
+  Serial.println("Đã hạ kính bên tài xế");
+}
+else if(b == '4') //Hạ 1/4 kính bên tài xế
+{ 
+  digitalWrite(relay4,HIGH);
+  digitalWrite(relay5,HIGH);
+  delay(1375);
+  digitalWrite(relay4,LOW);
+  digitalWrite(relay5,LOW);
+  Serial.println("Đã hạ 1/4 kính bên tài xế");
+}
+else if(b == '5') //Hạ 1/2 kính bên tài xế
+{ 
+  digitalWrite(relay4,HIGH);
+  digitalWrite(relay5,HIGH);
+  delay(2750);
+  digitalWrite(relay4,LOW);
+  digitalWrite(relay5,LOW);
+  Serial.println("Đã hạ 1/2 kính bên tài xế");
+}
+else if(b == '6') //Hạ 3/4 kính bên tài xế
+{ 
+  digitalWrite(relay4,HIGH);
+  digitalWrite(relay5,HIGH);
+  delay(4125);
+  digitalWrite(relay4,LOW);
+  digitalWrite(relay5,LOW);
+  Serial.println("Đã hạ 3/4 kính bên tài");
+}
+if (b == 'R') //Nâng hết kính bên phụ
+{
+  digitalWrite(relay6,HIGH);
+  digitalWrite(relay7,HIGH);
+  delay(5500);
+  digitalWrite(relay6,LOW);
+  digitalWrite(relay7,LOW);
+  Serial.println("Đã nâng hết kính bên phụ");
+}
+else if(b == '7') //Nâng 1/4 kính bên phụ
+{
+  digitalWrite(relay6,HIGH);
+  digitalWrite(relay7,HIGH);
+  delay(1375);
+  digitalWrite(relay6,LOW);
+  digitalWrite(relay7,LOW);
+  Serial.println("Đã nâng 1/4 kính bên phụ");
+}
+else if(b =='8') //Nâng 1/2 kính bên phụ
+{
+  digitalWrite(relay6,HIGH);
+  digitalWrite(relay7,HIGH);
+  delay(2750);
+  digitalWrite(relay6,LOW);
+  digitalWrite(relay7,LOW);
+  Serial.println("Đã nâng 1/2 kính bên phụ");
+}
+else if(b =='9') //Nâng 3/4 kính bên phụ
+{
+  digitalWrite(relay6,HIGH);
+  digitalWrite(relay7,HIGH);
+  delay(4125);
+  digitalWrite(relay6,LOW);
+  digitalWrite(relay7,LOW);
+  Serial.println("Đã nâng 3/4 kính bên phụ");
+}
+if(b == 'r') //Hạ hết kính bên phụ
+{
+  digitalWrite(relay8,HIGH);
+  digitalWrite(relay9,HIGH);
+  delay(5500);
+  digitalWrite(relay8,LOW);
+  digitalWrite(relay9,LOW);
+  Serial.println("Đã hạ hết kính bên phụ");
+}
+else if(b == '0') //Hạ 1/4 kính bên phụ
+{
+  digitalWrite(relay8,HIGH);
+  digitalWrite(relay9,HIGH);
+  delay(1375);
+  digitalWrite(relay8,LOW);
+  digitalWrite(relay9,LOW);
+  Serial.println("Đã hạ 1/4 kính bên ");
+}
+else if(b == '`') //Hạ 1/2 kính bên phụ
+{
+  digitalWrite(relay8,HIGH);
+  digitalWrite(relay9,HIGH);
+  delay(2750);
+  digitalWrite(relay8,LOW);
+  digitalWrite(relay9,LOW);
+  Serial.println("Đã hạ 1/2 kính bên phụ");
+}
+else if(b == '-') //Hạ 3/4 kính bên phụ
+{
+  digitalWrite(relay8,HIGH);
+  digitalWrite(relay9,HIGH);
+  delay(4125);
+  digitalWrite(relay8,LOW);
+  digitalWrite(relay9,LOW);
+  Serial.println("Đã hạ 3/4 kính bên phụ");
+}
+if(b == 'S') //Nâng hết kính sau tài xế 
+{
+  digitalWrite(relay10,HIGH);
+  digitalWrite(relay11,HIGH);
+  delay(5500);
+  digitalWrite(relay10,LOW);
+  digitalWrite(relay11,LOW);
+  Serial.println("Đã hạ nâng kính sau tài xế");
+}
+else if(b == '_') //Nâng 1/4 kính sau tài xế
+{
+  digitalWrite(relay10,HIGH);
+  digitalWrite(relay11,HIGH);
+  delay(1375);
+  digitalWrite(relay10,LOW);
+  digitalWrite(relay11,LOW);
+  Serial.println("Đã nâng 1/4 kính sau tài xế");
+}
+else if(b == '+') //Nâng 1/2 kính sau tài xế
+{
+  digitalWrite(relay10,HIGH);
+  digitalWrite(relay11,HIGH);
+  delay(2750);
+  digitalWrite(relay10,LOW);
+  digitalWrite(relay11,LOW);
+  Serial.println("Đã nâng 1/2 kính sau tài xế");
+}
+else if(b == '=') //Nâng 3/4 kính sau tài xế
+{
+  digitalWrite(relay10,HIGH);
+  digitalWrite(relay11,HIGH);
+  delay(4125);
+  digitalWrite(relay10,LOW);
+  digitalWrite(relay11,LOW);
+  Serial.println("Đã nâng 3/4 kính sau tài xế");
+}
+if(b == 's') //Hạ hết kính sau tài xế
+{
+  digitalWrite(relay12,HIGH);
+  digitalWrite(relay13,HIGH);
+  delay(5500);
+  digitalWrite(relay12,LOW);
+  digitalWrite(relay13,LOW);
+  Serial.println("Đã hạ hết kính sau tài xế");
+}
+else if(b == '*') //Hạ 1/4 kính sau tài xế
+{
+  digitalWrite(relay12,HIGH);
+  digitalWrite(relay13,HIGH);
+  delay(1375);
+  digitalWrite(relay12,LOW);
+  digitalWrite(relay13,LOW);
+  Serial.println("Đã hạ 1/4 kính sau tài xế");
+}
+else if(b == '&') //Hạ 1/2 kính sau tài xế
+{
+  digitalWrite(relay12,HIGH);
+  digitalWrite(relay13,HIGH);
+  delay(2750);
+  digitalWrite(relay12,LOW);
+  digitalWrite(relay13,LOW);
+  Serial.println("Đã hạ 1/2 kính sau tài");
+}
+else if(b == '^') //Hạ 3/4 kính sau tài xế
+{
+  digitalWrite(relay12,HIGH);
+  digitalWrite(relay13,HIGH);
+  delay(4125);
+  digitalWrite(relay12,LOW);
+  digitalWrite(relay13,LOW);
+  Serial.println("Đã hạ 3/4 kính sau tài xế");
+}
+if(b == 'P') //Nâng hết kính sau phụ
+{
+  digitalWrite(relay14,HIGH);
+  digitalWrite(relay15,HIGH);
+  delay(5500);
+  digitalWrite(relay14,LOW);
+  digitalWrite(relay15,LOW);
+  Serial.println("Đã nâng hết kính sau phụ");
+}
+else if(b == '%') //Nâng 1/4 kính sau phụ
+{
+  digitalWrite(relay14,HIGH);
+  digitalWrite(relay15,HIGH);
+  delay(1375);
+  digitalWrite(relay14,LOW);
+  digitalWrite(relay15,LOW);
+  Serial.println("Đã nâng 1/4 kính sau phụ");
+}
+else if(b == '$') //Nâng 1/2 kính sau phụ
+{
+  digitalWrite(relay14,HIGH);
+  digitalWrite(relay15,HIGH);
+  delay(2750);
+  digitalWrite(relay14,LOW);
+  digitalWrite(relay15,LOW);
+  Serial.println("Đã nâng 1/2 kính sau phụ");
+}
+else if(b == '#') //Nâng 3/4 kính sau phụ
+{
+  digitalWrite(relay14,HIGH);
+  digitalWrite(relay15,HIGH);
+  delay(4125);
+  digitalWrite(relay14,LOW);
+  digitalWrite(relay15,LOW);
+  Serial.println("Đã nâng 3/4 kính sau phụ");
+}
+if(b == 'p') //Hạ hết kính sau phụ
+{
+  digitalWrite(relay16,HIGH);
+  digitalWrite(relay17,HIGH);
+  delay(5500);
+  digitalWrite(relay16,LOW);
+  digitalWrite(relay17,LOW);
+  Serial.println("Đã hạ hết kính sau phụ");
+}
+else if(b == '@') //Hạ 1/4 kính sau phụ
+{
+  digitalWrite(relay16,HIGH);
+  digitalWrite(relay17,HIGH);
+  delay(1375);
+  digitalWrite(relay16,LOW);
+  digitalWrite(relay17,LOW);
+  Serial.println("Đã hạ 1/4 kính sau phụ");
+}
+else if(b == '!') //Hạ 1/2 kính sau phụ
+{
+  digitalWrite(relay16,HIGH);
+  digitalWrite(relay17,HIGH);
+  delay(2750);
+  digitalWrite(relay16,LOW);
+  digitalWrite(relay17,LOW);
+  Serial.println("Đã hạ 1/2 kính sau phụ");
+}
+else if(b == '~') //Hạ 3/4 kính sau phụ
+{
+  digitalWrite(relay16,HIGH);
+  digitalWrite(relay17,HIGH);
+  delay(4125);
+  digitalWrite(relay16,LOW);
+  digitalWrite(relay17,LOW);
+  Serial.println("Đã hạ 3/4 kính sau phụ");
+}
+}
+
+void chieusangtinhieu()
+{
+char c = Serial.read();
+if(c == 'F') //Mở đèn sương mù
+{
+  digitalWrite(relay20,HIGH);
+  Serial.println("Đã bật đèn sương mù");
+}
+else if(c == 'f') //Tắt đèn sương mù
+{
+  digitalWrite(relay20,LOW);
+  Serial.println("Đã tắt đèn sương mù");
+}
+if(c == 'H') //Mở đèn chiếu gần thì mở sương mù và đèn chiếu gần
+{
+  digitalWrite(relay21,HIGH);
+  digitalWrite(relay20,HIGH);
+  Serial.println("Đã bật đèn chiếu gần");
+}
+else if(c == 'h') //Tắt đèn chiếu gần thì đèn sương mù vẫn còn mở
+{
+  digitalWrite(relay21,LOW);
+  Serial.println("Đã tắt đèn chiếu gần");
+}
+if(c == 'U') //Mở đèn chiếu xa thì đèn sương mù mở và đèn chiếu gần tắt
+{
+  digitalWrite(relay22,HIGH);
+  digitalWrite(relay21,LOW);
+  digitalWrite(relay20,HIGH);
+  Serial.println("Đã bật đèn chiếu xa");
+}
+else if(c ==  'u') //Tắt đèn chiếu xa thì đèn chiếu xa tắt, đèn chiếu gần mở và đèn sương mù mở
+{
+  digitalWrite(relay22,LOW);
+  digitalWrite(relay21,HIGH);
+  digitalWrite(relay20,HIGH);
+  Serial.println("Đã tắt đèn chiếu xa");
+}
+else if(c == 'A') //Tắt hết tất cả các đèn trừ đèn tín hiệu
+{
+  digitalWrite(relay20,LOW);
+  digitalWrite(relay21,LOW);
+  digitalWrite(relay22,LOW);
+  Serial.println("Đã tắt hết đèn chiéu sáng");
+}
+if(c == 'T') //Mở đèn xi nhan phải thì đèn xi nhan trái tắt
+{
+  digitalWrite(relay24,HIGH);
+  digitalWrite(relay26,LOW);
+  Serial.println("Đã bật đèn xi nhan phải");
+}
+else if(c == 't')//Tắt đèn xi nhan phải
+{
+  digitalWrite(relay24,LOW);
+  Serial.println("Đã tắt đèn xi nhan phải");
+}
+if(c == 'V') //Mở đèn xi nhan trái thì xi nhan phải tắt
+{
+  digitalWrite(relay26,HIGH);
+  digitalWrite(relay24,LOW);
+  Serial.println("Đã bật đèn xin nhan trái");
+}
+else if(c == 'v') //Tắt đèn xi nhan trái
+{
+  digitalWrite(relay26,LOW);
+  Serial.println("Đã tắt đèn xi nhan trái");
+}
+else if(c == 'Z') //Mở đèn ưu tiên
+{
+  digitalWrite(relay28,HIGH);
+  Serial.println("Đã bật đèn ưu tiên");
+}
+if(c == 'z') //Tắt đèn ưu tiên
+{
+  digitalWrite(relay28,LOW);
+  Serial.println("Đã tắt đèn ưu tiên");
+}
+}
+void khoaig()
+{
+
+char d = Serial.read();
+if(d == 'X') //Mở khóa IG
+{
+  digitalWrite(relay30,HIGH);
+  Serial.println("Đã bật khóa IG");
+}
+else if(d == 'x') //Tắt khóa IG
+{
+  digitalWrite(relay30,LOW);
+  Serial.println("Đã tắt khóa IG");
+}
+}
+

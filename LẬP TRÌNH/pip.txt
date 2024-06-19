@@ -1,0 +1,15 @@
+pip install pipwin
+python -m pip install --upgrade pip (pip install --upgrade pip)
+pip install pyaudio
+pip install speechRecognition
+pip install playsound
+pip install gtts
+pip install setuptools
+pip install wikipedia
+pip install youtube-search
+pip install pyttsx3
+pip install selenium
+pip install webdriver-manager
+pip install pandas (có hoặc không cũng được)
+pip install pyserial
+python -m pip install wheel setuptools pip --upgrade
